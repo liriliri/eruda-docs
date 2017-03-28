@@ -4,6 +4,7 @@
   "description": "Eruda website",
   "main": "index.js",
   "scripts": {
+    "build": "gulp",
     "serve": "nws -p 3000"
   },
   "eustia": {
