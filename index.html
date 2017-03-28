@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Eruda: Console for Mobile browsers</title>
+    <!-- build:style -->
+    <link rel="stylesheet" href="style.css">
+    <!-- endbuild -->
+    <script type="text/javascript">
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-52367952-2', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <!-- build:jsEruda -->
+    <script src="node_modules/eruda/eruda.js"></script>
+    <!-- endbuild -->
+    <script>eruda.init();</script>
+</head>
+<body>
+<header class="header">
+    <canvas id="c"></canvas>
+    <img src="http://7xn2zy.com1.z0.glb.clouddn.com/eruda_banner_bg.png"
+         alt="Eruda"/>
+    <h1 class="title">Eruda</h1>
+    <h2 class="subtitle">Console for Mobile Browsers</h2>
+</header>
+<svg id="triangle" width="800" height="70" viewBox="0,0,80,5"
+     preserveAspectRatio="none">
+    <polygon points="0,0 0,5 80,5" style="fill:#fff"/>
+</svg>
+<p class="github-link">View it on <a href="https://github.com/liriliri/eruda">GitHub</a>
+</p>
+<p class="hint">Click the right bottom button to inspect this page!</p>
+<ul class="buttons">
+    <li id="error-btn" class="yellow" style="z-index: 100;" ontouchstart>Trigger
+        Error
+    </li>
+    <li id="ajax-btn" class="orange" style="z-index: 90;" ontouchstart>Send Ajax
+        Request
+    </li>
+    <!-- build:fpsBtn -->
+    <li id="fps-btn" class="purple" style="z-index: 80;" data-src="node_modules/eruda-fps/eruda-fps.js" ontouchstart>Load FPS
+        Plugin
+    </li>
+    <!-- endbuild -->
+</ul>
+<!-- build:jsEustia -->
+<script src="eustia.js"></script>
+<!-- endbuild -->
+<script>
+var $event = _['$event'],
+    loadJs = _['loadJs'],
+    raf = _['raf'],
+    Class = _['Class'],
+    $data = _['$data'],
+    ajax = _['ajax'];
+
+console.log('%cHello, This is Eruda:)', 'color: #e17555;');
+
+$event.on('#error-btn', 'click', function () { TriggerError() });
+
+$event.on('#ajax-btn', 'click', function () { ajax.get('test.json') });
+
+$event.on('#fps-btn', 'click', function ()
+{
+    if (window.erudaFps) return;
+    loadJs($data(this, 'src'), function ()
+    {
+        eruda.add(erudaFps).show('fps').show();
+    });
+});
+
+// http://codepen.io/towc/pen/mJzOWJ/
+var c = document.getElementById('c');
+var w = c.width = getCanvasWidth(),
+    h = c.height = 210,
+    ctx = c.getContext('2d'),
+    opts = {
+        len: 20,
+        count: 50,
+        baseTime: 10,
+        addedTime: 10,
+        dieChance: .05,
+        spawnChance: 1,
+        sparkChance: .1,
+        sparkDist: 10,
+        sparkSize: 2,
+        color: 'hsl(hue,100%,light%)',
+        baseLight: 50,
+        addedLight: 10, // [50-10,50+10]
+        shadowToTimePropMult: 6,
+        baseLightInputMultiplier: .01,
+        addedLightInputMultiplier: .02,
+        cx: w / 2,
+        cy: h / 2,
+        repaintAlpha: .04,
+        hueChange: .1
+    },
+    tick = 0,
+    lines = [],
+    dieX = w / 2 / opts.len,
+    dieY = h / 2 / opts.len,
+    baseRad = Math.PI * 2 / 6;
+
+ctx.fillStyle = '#eda29b';
+ctx.fillRect(0, 0, w, h);
+
+function loop()
+{
+    raf(loop);
+
+    ++tick;
+
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.shadowBlur = 0;
+    ctx.fillStyle = 'rgba(237, 162, 155,alp)'.replace('alp', opts.repaintAlpha);
+    ctx.fillRect(0, 0, w, h);
+    ctx.globalCompositeOperation = 'lighter';
+
+    if (lines.length < opts.count && Math.random() < opts.spawnChance) lines.push(new Line);
+
+    lines.map(function (line) { line.step() });
+}
+
+var Line = Class({
+    className: 'Line',
+    initialize: function ()
+    {
+        this.reset();
+    },
+    reset: function ()
+    {
+        this.x = 0;
+        this.y = 0;
+        this.addedX = 0;
+        this.addedY = 0;
+
+        this.rad = 0;
+
+        this.lightInputMultiplier = opts.baseLightInputMultiplier + opts.addedLightInputMultiplier * Math.random();
+
+        this.color = opts.color.replace('hue', tick * opts.hueChange);
+        this.cumulativeTime = 0;
+
+        this.beginPhase();
+    },
+    beginPhase: function ()
+    {
+        this.x += this.addedX;
+        this.y += this.addedY;
+
+        this.time = 0;
+        this.targetTime = ( opts.baseTime + opts.addedTime * Math.random() ) | 0;
+
+        this.rad += baseRad * ( Math.random() < .5 ? 1 : -1 );
+        this.addedX = Math.cos(this.rad);
+        this.addedY = Math.sin(this.rad);
+
+        if (Math.random() < opts.dieChance || this.x > dieX || this.x < -dieX || this.y > dieY || this.y < -dieY) 
+        {
+            this.reset();
+        }
+    },
+    step: function ()
+    {
+        ++this.time;
+        ++this.cumulativeTime;
+
+        if (this.time >= this.targetTime)
+            this.beginPhase();
+
+        var prop = this.time / this.targetTime,
+            wave = Math.sin(prop * Math.PI / 2),
+            x = this.addedX * wave,
+            y = this.addedY * wave;
+
+        ctx.shadowBlur = prop * opts.shadowToTimePropMult;
+        ctx.fillStyle = ctx.shadowColor = this.color.replace('light', opts.baseLight + opts.addedLight * Math.sin(this.cumulativeTime * this.lightInputMultiplier));
+        ctx.fillRect(opts.cx + ( this.x + x ) * opts.len, opts.cy + ( this.y + y ) * opts.len, 2, 2);
+
+        if (Math.random() < opts.sparkChance)
+            ctx.fillRect(opts.cx + ( this.x + x ) * opts.len + Math.random() * opts.sparkDist * ( Math.random() < .5 ? 1 : -1 ) - opts.sparkSize / 2, opts.cy + ( this.y + y ) * opts.len + Math.random() * opts.sparkDist * ( Math.random() < .5 ? 1 : -1 ) - opts.sparkSize / 2, opts.sparkSize, opts.sparkSize)
+    }
+});
+
+loop();
+
+window.addEventListener('resize', function ()
+{
+    w = c.width = getCanvasWidth();
+    h = c.height = 210;
+    ctx.fillStyle = '#eda29b';
+    ctx.fillRect(0, 0, w, h);
+
+    opts.cx = w / 2;
+    opts.cy = h / 2;
+
+    dieX = w / 2 / opts.len;
+    dieY = h / 2 / opts.len;
+});
+
+function getCanvasWidth()
+{
+    return window.innerWidth > 800 ? 800 : window.innerWidth;
+}
+</script>
+</body>
+</html>

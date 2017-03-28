@@ -1,0 +1,34 @@
+{
+  "name": "freya",
+  "version": "0.0.1",
+  "description": "Eruda website",
+  "main": "index.js",
+  "scripts": {
+    "serve": "nws -p 3000"
+  },
+  "eustia": {
+    "files": "index.html",
+    "output": "eustia.js",
+    "format": "global"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liriliri/freya.git"
+  },
+  "author": "surunzi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/liriliri/freya/issues"
+  },
+  "homepage": "https://github.com/liriliri/freya#readme",
+  "devDependencies": {
+    "eruda": "^1.2.2",
+    "eruda-fps": "^1.0.0",
+    "gulp": "^3.9.1",
+    "gulp-cssmin": "^0.1.7",
+    "gulp-html-replace": "^1.6.2",
+    "gulp-htmlmin": "^3.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^2.1.2"
+  }
+}

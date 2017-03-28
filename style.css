@@ -1,0 +1,110 @@
+body, html {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+html {
+    background: #f8f9fa;
+}
+body {
+    max-width: 800px;
+    background: #fff;
+    margin: 0 auto;
+}
+.header {
+    background: #eda29b;
+    position: relative;
+    margin: 0;
+    padding: 30px 0 40px 0;
+    color: #fff;
+}
+#c {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+}
+.header img {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+}
+#triangle {
+    width: 100%;
+    position: relative;
+    top: -50px;
+    margin-bottom: -25px;
+}
+.github-link {
+    font-size: 14px;
+    color: #555;
+    margin-top: 0;
+}
+.title, .subtitle, .github-link, .hint {
+    font-family: 'Avenir Next', Avenir, 'Helvetica Neue', Helvetica, 'Franklin Gothic Medium', 'Franklin Gothic', 'ITC Franklin Gothic', Arial, sans-serif;
+    text-align: center;
+}
+.title {
+    font-size: 36px;
+    padding-left: 15px;
+    text-align: left;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 10;
+}
+.subtitle {
+    text-align: left;
+    font-size: 12px;
+    position: relative;
+    z-index: 10;
+    padding-left: 15px;
+    margin-bottom: 50px;
+    text-decoration: underline;
+}
+.github-link a {
+    color: #76a2ee;
+    font-size: 18px;
+}
+.hint {
+    color: #555;
+    margin-bottom: 50px;
+}
+.buttons {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.buttons li {
+    color: #fff;
+    padding: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.05),0 1px 4px 0 rgba(0,0,0,.2), 0 3px 1px -2px rgba(0,0,0,.1);
+    position: relative;
+    text-align: center;
+    transition: background .3s, color .3s;
+    cursor: pointer;
+}
+.buttons li.yellow {
+    background: #f2d367;
+    color: #e07556;
+}
+.buttons li.yellow:active {
+    background: #bca351;
+}
+.buttons li.orange {
+    background: #e17555;
+    color: #9c3c53;
+}
+.buttons li.orange:active {
+    background: #bc5f45;
+}
+.buttons li.purple {
+    background: #9d3b53;
+    color: #513056;
+}
+.buttons li.purple:active {
+    background: #843245;
+}
