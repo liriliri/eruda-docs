@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>Eruda: Console for Mobile browsers</title>
+    <title>Eruda: Console for Mobile Browsers</title>
     <!-- build:style -->
     <link rel="stylesheet" href="style.css">
     <!-- endbuild -->
@@ -62,7 +62,14 @@ _.ready(function ()
         $data = _['$data'],
         ajax = _['ajax'];
 
-    console.log('%cHello, This is Eruda:)', 'color: #e17555;');
+    console.log.apply(console, [
+        '%c %c %c Hello, this is Eruda :) %c %c ',
+        'background: #707d8b; padding:5px 0;',
+        'background: #707d8b; padding:5px 0;',
+        'color: #fff; background: #76a2ee; padding: 5px 0;',
+        'background: #707d8b; padding:5px 0;',
+        'background: #707d8b; padding:5px 0;'
+    ]);
 
     $event.on('#error-btn', 'click', function () { TriggerError() });
 
