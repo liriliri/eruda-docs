@@ -305,6 +305,43 @@ window._ = (function()
         return exports;
     })();
 
+    /* ------------------------------ loadJs ------------------------------ */
+
+    var loadJs = _.loadJs = (function ()
+    {
+        /* Inject script tag into page with given src value.
+         *
+         * |Name|Type    |Desc           |
+         * |----|--------|---------------|
+         * |src |string  |Script source  |
+         * |cb  |function|Onload callback|
+         *
+         * ```javascript
+         * loadJs('main.js', function ()
+         * {
+         *     // Do something...
+         * });
+         * ```
+         */
+
+        function exports(src, cb)
+        {
+            var script = document.createElement('script');
+            script.src = src;
+            script.onload = function ()
+            {
+                var isNotLoaded = script.readyState &&
+                    script.readyState != 'complete' &&
+                    script.readyState != 'loaded';
+
+                cb && cb(!isNotLoaded);
+            };
+            document.body.appendChild(script);
+        }
+
+        return exports;
+    })();
+
     /* ------------------------------ objToStr ------------------------------ */
 
     var objToStr = _.objToStr = (function ()
@@ -875,43 +912,6 @@ window._ = (function()
             }
 
             return true;
-        }
-
-        return exports;
-    })();
-
-    /* ------------------------------ loadJs ------------------------------ */
-
-    _.loadJs = (function ()
-    {
-        /* Inject script tag into page with given src value.
-         *
-         * |Name|Type    |Desc           |
-         * |----|--------|---------------|
-         * |src |string  |Script source  |
-         * |cb  |function|Onload callback|
-         *
-         * ```javascript
-         * loadJs('main.js', function ()
-         * {
-         *     // Do something...
-         * });
-         * ```
-         */
-
-        function exports(src, cb)
-        {
-            var script = document.createElement('script');
-            script.src = src;
-            script.onload = function ()
-            {
-                var isNotLoaded = script.readyState &&
-                    script.readyState != 'complete' &&
-                    script.readyState != 'loaded';
-
-                cb && cb(!isNotLoaded);
-            };
-            document.body.appendChild(script);
         }
 
         return exports;
@@ -1501,7 +1501,7 @@ window._ = (function()
 
     /* ------------------------------ $data ------------------------------ */
 
-    _.$data = (function ()
+    var $data = _.$data = (function ()
     {
         /* Wrapper of $attr, adds data- prefix to keys.
          *
@@ -1579,7 +1579,7 @@ window._ = (function()
                 handler,
                 handlerQueue = formatHandlers.call(this, e, handlers);
 
-            e = new delegate.Event(e);
+            e = new exports.Event(e);
 
             var i = 0, j, matched, ret;
 
@@ -1603,7 +1603,7 @@ window._ = (function()
         function formatHandlers(e, handlers)
         {
             var current = e.target,
-                ret     = [],
+                ret = [],
                 delegateCount = handlers.delegateCount,
                 selector, matches, handler, i;
 
@@ -1642,7 +1642,7 @@ window._ = (function()
             {
                 var handler = {
                         selector: selector,
-                        handler : fn
+                        handler: fn
                     },
                     handlers;
 
@@ -1721,7 +1721,7 @@ window._ = (function()
 
     /* ------------------------------ $event ------------------------------ */
 
-    _.$event = (function (exports)
+    var $event = _.$event = (function (exports)
     {
         /* bind events to certain dom elements.
          *
@@ -1787,7 +1787,7 @@ window._ = (function()
 
     /* ------------------------------ raf ------------------------------ */
 
-    _.raf = (function (exports)
+    var raf = _.raf = (function (exports)
     {
         /* Shortcut for requestAnimationFrame.
          *
@@ -1845,50 +1845,6 @@ window._ = (function()
 
         return exports;
     })({});
-
-    /* ------------------------------ ready ------------------------------ */
-
-    _.ready = (function ()
-    {
-        /* Invoke callback when dom is ready, similar to jQuery ready.
-         *
-         * |Name|Type    |Desc             |
-         * |----|--------|-----------------|
-         * |fn  |function|Callback function|
-         *
-         * ```javascript
-         * ready(function ()
-         * {
-         *     // It's safe to manipulate dom here.
-         * });
-         * ```
-         */
-
-        var fns = [],
-            listener,
-            doc = document,
-            hack = doc.documentElement.doScroll,
-            domContentLoaded = 'DOMContentLoaded',
-            loaded = (hack ? /^loaded|^c/ : /^loaded|^i|^c/).test(doc.readyState);
-
-        if (!loaded)
-        {
-            doc.addEventListener(domContentLoaded, listener = function ()
-            {
-                doc.removeEventListener(domContentLoaded, listener);
-                loaded = 1;
-                /* eslint-disable no-cond-assign */
-                while (listener = fns.shift()) listener();
-            });
-        }
-
-        function exports(fn)
-        {
-            loaded ? setTimeout(fn, 0) : fns.push(fn)
-        }
-
-        return exports;
-    })();
 
     /* ------------------------------ rtrim ------------------------------ */
 
@@ -2066,7 +2022,7 @@ window._ = (function()
 
     /* ------------------------------ ajax ------------------------------ */
 
-    _.ajax = (function ()
+    var ajax = _.ajax = (function ()
     {
         /* Perform an asynchronous HTTP request.
          *
@@ -2234,6 +2190,171 @@ window._ = (function()
         }
 
         return exports;
+    })();
+
+    /* ------------------------------ index ------------------------------ */
+
+    (function ()
+    {
+        /* dependencies
+         * $event loadJs raf Class $data ajax 
+         */
+
+        console.log.apply(console, [
+            '%c %c %c Hello, this is Eruda :) %c %c ',
+            'background: #707d8b; padding:5px 0;',
+            'background: #707d8b; padding:5px 0;',
+            'color: #fff; background: #76a2ee; padding: 5px 0;',
+            'background: #707d8b; padding:5px 0;',
+            'background: #707d8b; padding:5px 0;'
+        ]);
+
+        $event.on('#error-btn', 'click', function () { TriggerError() });
+
+        $event.on('#ajax-btn', 'click', function () { ajax.get('test.json') });
+
+        $event.on('#fps-btn', 'click', function ()
+        {
+            if (window.erudaFps) return;
+            loadJs($data(this, 'src'), function ()
+            {
+                eruda.add(erudaFps).show('fps').show();
+            });
+        });
+
+        // http://codepen.io/towc/pen/mJzOWJ/
+        var c = document.getElementById('c');
+        var w = c.width = getCanvasWidth(),
+            h = c.height = 210,
+            ctx = c.getContext('2d'),
+            opts = {
+                len: 20,
+                count: 50,
+                baseTime: 10,
+                addedTime: 10,
+                dieChance: .05,
+                spawnChance: 1,
+                sparkChance: .1,
+                sparkDist: 10,
+                sparkSize: 2,
+                color: 'hsl(hue,100%,light%)',
+                baseLight: 50,
+                addedLight: 10, // [50-10,50+10]
+                shadowToTimePropMult: 6,
+                baseLightInputMultiplier: .01,
+                addedLightInputMultiplier: .02,
+                cx: w / 2,
+                cy: h / 2,
+                repaintAlpha: .04,
+                hueChange: .1
+            },
+            tick = 0,
+            lines = [],
+            dieX = w / 2 / opts.len,
+            dieY = h / 2 / opts.len,
+            baseRad = Math.PI * 2 / 6;
+
+        ctx.fillStyle = '#eda29b';
+        ctx.fillRect(0, 0, w, h);
+
+        function loop()
+        {
+            raf(loop);
+
+            ++tick;
+
+            ctx.globalCompositeOperation = 'source-over';
+            ctx.shadowBlur = 0;
+            ctx.fillStyle = 'rgba(237, 162, 155,alp)'.replace('alp', opts.repaintAlpha);
+            ctx.fillRect(0, 0, w, h);
+            ctx.globalCompositeOperation = 'lighter';
+
+            if (lines.length < opts.count && Math.random() < opts.spawnChance) lines.push(new Line);
+
+            lines.map(function (line) { line.step() });
+        }
+
+        var Line = Class({
+            className: 'Line',
+            initialize: function ()
+            {
+                this.reset();
+            },
+            reset: function ()
+            {
+                this.x = 0;
+                this.y = 0;
+                this.addedX = 0;
+                this.addedY = 0;
+
+                this.rad = 0;
+
+                this.lightInputMultiplier = opts.baseLightInputMultiplier + opts.addedLightInputMultiplier * Math.random();
+
+                this.color = opts.color.replace('hue', tick * opts.hueChange);
+                this.cumulativeTime = 0;
+
+                this.beginPhase();
+            },
+            beginPhase: function ()
+            {
+                this.x += this.addedX;
+                this.y += this.addedY;
+
+                this.time = 0;
+                this.targetTime = ( opts.baseTime + opts.addedTime * Math.random() ) | 0;
+
+                this.rad += baseRad * ( Math.random() < .5 ? 1 : -1 );
+                this.addedX = Math.cos(this.rad);
+                this.addedY = Math.sin(this.rad);
+
+                if (Math.random() < opts.dieChance || this.x > dieX || this.x < -dieX || this.y > dieY || this.y < -dieY) 
+                {
+                    this.reset();
+                }
+            },
+            step: function ()
+            {
+                ++this.time;
+                ++this.cumulativeTime;
+
+                if (this.time >= this.targetTime)
+                    this.beginPhase();
+
+                var prop = this.time / this.targetTime,
+                    wave = Math.sin(prop * Math.PI / 2),
+                    x = this.addedX * wave,
+                    y = this.addedY * wave;
+
+                ctx.shadowBlur = prop * opts.shadowToTimePropMult;
+                ctx.fillStyle = ctx.shadowColor = this.color.replace('light', opts.baseLight + opts.addedLight * Math.sin(this.cumulativeTime * this.lightInputMultiplier));
+                ctx.fillRect(opts.cx + ( this.x + x ) * opts.len, opts.cy + ( this.y + y ) * opts.len, 2, 2);
+
+                if (Math.random() < opts.sparkChance)
+                    ctx.fillRect(opts.cx + ( this.x + x ) * opts.len + Math.random() * opts.sparkDist * ( Math.random() < .5 ? 1 : -1 ) - opts.sparkSize / 2, opts.cy + ( this.y + y ) * opts.len + Math.random() * opts.sparkDist * ( Math.random() < .5 ? 1 : -1 ) - opts.sparkSize / 2, opts.sparkSize, opts.sparkSize)
+            }
+        });
+
+        loop();
+
+        window.addEventListener('resize', function ()
+        {
+            w = c.width = getCanvasWidth();
+            h = c.height = 210;
+            ctx.fillStyle = '#eda29b';
+            ctx.fillRect(0, 0, w, h);
+
+            opts.cx = w / 2;
+            opts.cy = h / 2;
+
+            dieX = w / 2 / opts.len;
+            dieY = h / 2 / opts.len;
+        });
+
+        function getCanvasWidth()
+        {
+            return window.innerWidth > 800 ? 800 : window.innerWidth;
+        }
     })();
 
     return _;

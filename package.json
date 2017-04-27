@@ -8,7 +8,9 @@
     "serve": "nws -p 3000"
   },
   "eustia": {
-    "files": "index.html",
+    "files": [],
+    "library": "./",
+    "include": "index",
     "output": "eustia.js",
     "format": "global"
   },
@@ -26,6 +28,7 @@
     "eruda": "^1.2.2",
     "eruda-fps": "^1.0.0",
     "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
     "gulp-cssmin": "^0.1.7",
     "gulp-html-replace": "^1.6.2",
     "gulp-htmlmin": "^3.0.0",

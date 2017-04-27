@@ -3,7 +3,13 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     htmlmin = require('gulp-htmlmin'),
     htmlReplace = require('gulp-html-replace'),
+    clean = require('gulp-clean'),
     rename = require('gulp-rename');
+
+gulp.task('clean', function () 
+{
+    return gulp.src('dist').pipe(clean());
+});    
 
 gulp.task('html', function () 
 {
@@ -31,7 +37,7 @@ gulp.task('css', function ()
 
 gulp.task('js', function () 
 {
-    return gulp.src('*.js')
+    return gulp.src('eustia.js')
                .pipe(uglify())
                .pipe(rename({suffix: '.min'}))
                .pipe(gulp.dest('dist'));
@@ -48,4 +54,4 @@ gulp.task('copy', function ()
                .pipe(gulp.dest('dist'));
 });
 
-gulp.task('default', ['html', 'css', 'js', 'copy']);
+gulp.task('default', ['clean', 'html', 'css', 'js', 'copy']);
