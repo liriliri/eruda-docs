@@ -47,7 +47,8 @@ gulp.task('copy', function ()
 {
     var src = [
         'node_modules/eruda/eruda.min.js',
-        'node_modules/eruda-fps/eruda-fps.min.js'
+        'node_modules/eruda-fps/eruda-fps.min.js',
+        'test.json'
     ];
 
     return gulp.src(src)
