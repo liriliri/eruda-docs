@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+    runSequence = require('run-sequence'),
     cssmin = require('gulp-cssmin'),
     uglify = require('gulp-uglify'),
     htmlmin = require('gulp-htmlmin'),
@@ -55,4 +56,7 @@ gulp.task('copy', function ()
                .pipe(gulp.dest('dist'));
 });
 
-gulp.task('default', ['clean', 'html', 'css', 'js', 'copy']);
+gulp.task('default', function (cb)
+{
+    runSequence('clean', ['html', 'css', 'js', 'copy'], cb);
+});
