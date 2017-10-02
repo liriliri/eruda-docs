@@ -1,4 +1,4 @@
-_('$event loadJs raf Class $data ajax');
+_('$event raf Class $data ajax');
 
 console.log.apply(console, [
     '%c %c %c Hello, this is Eruda :) %c %c ',
@@ -9,17 +9,32 @@ console.log.apply(console, [
     'background: #707d8b; padding:5px 0;'
 ]);
 
-$event.on('#error-btn', 'click', function () { TriggerError() });
-
-$event.on('#ajax-btn', 'click', function () { ajax.get('test.json') });
-
-$event.on('#fps-btn', 'click', function ()
-{
-    if (window.erudaFps) return;
-    loadJs($data(this, 'src'), function ()
+$event.on('#error-btn', 'click', function () 
+{ 
+    console.clear();
+    try 
     {
-        eruda.add(erudaFps).show('fps').show();
-    });
+        triggerError(); 
+    } catch (e) 
+    {
+        eruda.show().show('console');
+        throw e;
+    }
+});
+
+$event.on('#ajax-btn', 'click', function () 
+{ 
+    ajax.get('test.json');
+    eruda.show().show('network');
+});
+
+$event.on('#log-btn', 'click', function ()
+{
+    console.clear();
+    console.log(navigator);
+    console.log(location);
+    console.log(performance);
+    eruda.show().show('console');
 });
 
 // http://codepen.io/towc/pen/mJzOWJ/

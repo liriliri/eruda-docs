@@ -18,8 +18,7 @@ gulp.task('html', function ()
                .pipe(htmlReplace({
                    style: '<link rel="stylesheet" href="style.min.css">',
                    jsEruda: '<script src="eruda.min.js"></script>',
-                   jsEustia: '<script src="eustia.min.js"></script>',
-                   fpsBtn: '<li id="fps-btn" class="purple" style="z-index: 80;" data-src="eruda-fps.min.js" ontouchstart>Load FPS Plugin</li>'
+                   jsEustia: '<script src="eustia.min.js"></script>'
                })) 
                .pipe(htmlmin({
                    collapseWhitespace: true,
@@ -50,7 +49,8 @@ gulp.task('copy', function ()
         'node_modules/eruda/eruda.min.js',
         'node_modules/eruda-fps/eruda-fps.min.js',
         'favicon.ico',
-        'test.json'
+        'test.json',
+        'im*/*.png'
     ];
 
     return gulp.src(src)

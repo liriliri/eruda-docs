@@ -305,43 +305,6 @@ window._ = (function()
         return exports;
     })();
 
-    /* ------------------------------ loadJs ------------------------------ */
-
-    var loadJs = _.loadJs = (function ()
-    {
-        /* Inject script tag into page with given src value.
-         *
-         * |Name|Type    |Desc           |
-         * |----|--------|---------------|
-         * |src |string  |Script source  |
-         * |cb  |function|Onload callback|
-         *
-         * ```javascript
-         * loadJs('main.js', function ()
-         * {
-         *     // Do something...
-         * });
-         * ```
-         */
-
-        function exports(src, cb)
-        {
-            var script = document.createElement('script');
-            script.src = src;
-            script.onload = function ()
-            {
-                var isNotLoaded = script.readyState &&
-                    script.readyState != 'complete' &&
-                    script.readyState != 'loaded';
-
-                cb && cb(!isNotLoaded);
-            };
-            document.body.appendChild(script);
-        }
-
-        return exports;
-    })();
-
     /* ------------------------------ objToStr ------------------------------ */
 
     var objToStr = _.objToStr = (function ()
@@ -393,6 +356,124 @@ window._ = (function()
         function exports(val)
         {
             return objToStr(val) === '[object Arguments]';
+        }
+
+        return exports;
+    })();
+
+    /* ------------------------------ isArr ------------------------------ */
+
+    var isArr = _.isArr = (function (exports)
+    {
+        /* Check if value is an `Array` object.
+         *
+         * |Name  |Type   |Desc                              |
+         * |------|-------|----------------------------------|
+         * |val   |*      |The value to check                |
+         * |return|boolean|True if value is an `Array` object|
+         *
+         * ```javascript
+         * isArr([]); // -> true
+         * isArr({}); // -> false
+         * ```
+         */
+
+        /* dependencies
+         * objToStr 
+         */
+
+        exports = Array.isArray || function (val)
+        {
+            return objToStr(val) === '[object Array]';
+        };
+
+        return exports;
+    })({});
+
+    /* ------------------------------ castPath ------------------------------ */
+
+    var castPath = _.castPath = (function ()
+    {
+        /* Cast value into a property path array.
+         *
+         * |Name  |Type  |Desc               |
+         * |------|------|-------------------|
+         * |str   |*     |Value to inspect   |
+         * |[obj] |object|Object to query    |
+         * |return|array |Property path array|
+         * 
+         * ```javascript
+         * castPath('a.b.c'); // -> ['a', 'b', 'c']
+         * castPath(['a']); // -> ['a']
+         * castPath('a[0].b'); // -> ['a', '0', 'b']
+         * castPath('a.b.c', {'a.b.c': true}); // -> ['a.b.c']
+         * ```
+         */
+
+        /* dependencies
+         * has isArr 
+         */
+
+        function exports(str, obj) 
+        {
+            if (isArr(str)) return str;
+            if (obj && has(obj, str)) return [str];
+
+            var ret = [];
+
+            str.replace(regPropName, function(match, number, quote, str) 
+            {
+                ret.push(quote ? str.replace(regEscapeChar, '$1') : (number || match));
+            });
+
+            return ret;
+        }
+
+        // Lodash _stringToPath
+        var regPropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g,
+            regEscapeChar = /\\(\\)?/g;
+
+        return exports;
+    })();
+
+    /* ------------------------------ safeGet ------------------------------ */
+
+    var safeGet = _.safeGet = (function ()
+    {
+        /* Get object property, don't throw undefined error.
+         *
+         * |Name  |Type        |Desc                     |
+         * |------|------------|-------------------------|
+         * |obj   |object      |Object to query          |
+         * |path  |array string|Path of property to get  |
+         * |return|*           |Target value or undefined|
+         *
+         * ```javascript
+         * var obj = {a: {aa: {aaa: 1}}};
+         * safeGet(obj, 'a.aa.aaa'); // -> 1
+         * safeGet(obj, ['a', 'aa']); // -> {aaa: 1}
+         * safeGet(obj, 'a.b'); // -> undefined
+         * ```
+         */
+
+        /* dependencies
+         * isUndef castPath 
+         */
+
+        function exports(obj, path)
+        {
+            path = castPath(path, obj);
+
+            var prop;
+
+            /* eslint-disable no-cond-assign */
+            while (prop = path.shift())
+            {
+                obj = obj[prop];
+                if (isUndef(obj)) return;
+            }
+
+            return obj;
         }
 
         return exports;
@@ -459,78 +540,6 @@ window._ = (function()
         return exports;
     })();
 
-    /* ------------------------------ safeGet ------------------------------ */
-
-    var safeGet = _.safeGet = (function ()
-    {
-        /* Get object property, don't throw undefined error.
-         *
-         * |Name  |Type        |Desc                     |
-         * |------|------------|-------------------------|
-         * |obj   |object      |Object to query          |
-         * |path  |array string|Path of property to get  |
-         * |return|*           |Target value or undefined|
-         *
-         * ```javascript
-         * var obj = {a: {aa: {aaa: 1}}};
-         * safeGet(obj, 'a.aa.aaa'); // -> 1
-         * safeGet(obj, ['a', 'aa']); // -> {aaa: 1}
-         * safeGet(obj, 'a.b'); // -> undefined
-         * ```
-         */
-
-        /* dependencies
-         * isStr isUndef 
-         */
-
-        function exports(obj, path)
-        {
-            if (isStr(path)) path = path.split('.');
-
-            var prop;
-
-            /* eslint-disable no-cond-assign */
-            while (prop = path.shift())
-            {
-                obj = obj[prop];
-                if (isUndef(obj)) return;
-            }
-
-            return obj;
-        }
-
-        return exports;
-    })();
-
-    /* ------------------------------ isArr ------------------------------ */
-
-    var isArr = _.isArr = (function (exports)
-    {
-        /* Check if value is an `Array` object.
-         *
-         * |Name  |Type   |Desc                              |
-         * |------|-------|----------------------------------|
-         * |val   |*      |The value to check                |
-         * |return|boolean|True if value is an `Array` object|
-         *
-         * ```javascript
-         * isArr([]); // -> true
-         * isArr({}); // -> false
-         * ```
-         */
-
-        /* dependencies
-         * objToStr 
-         */
-
-        exports = Array.isArray || function (val)
-        {
-            return objToStr(val) === '[object Array]';
-        };
-
-        return exports;
-    })({});
-
     /* ------------------------------ isNum ------------------------------ */
 
     var isNum = _.isNum = (function ()
@@ -541,6 +550,12 @@ window._ = (function()
          * |------|-------|-------------------------------------|
          * |value |*      |Value to check                       |
          * |return|boolean|True if value is correctly classified|
+         * 
+         * ```javascript
+         * isNum(5); // -> true
+         * isNum(5.1); // -> true
+         * isNum({}); // -> false
+         * ```
          */
 
         /* dependencies
@@ -2197,7 +2212,7 @@ window._ = (function()
     (function ()
     {
         /* dependencies
-         * $event loadJs raf Class $data ajax 
+         * $event raf Class $data ajax 
          */
 
         console.log.apply(console, [
@@ -2209,17 +2224,32 @@ window._ = (function()
             'background: #707d8b; padding:5px 0;'
         ]);
 
-        $event.on('#error-btn', 'click', function () { TriggerError() });
-
-        $event.on('#ajax-btn', 'click', function () { ajax.get('test.json') });
-
-        $event.on('#fps-btn', 'click', function ()
-        {
-            if (window.erudaFps) return;
-            loadJs($data(this, 'src'), function ()
+        $event.on('#error-btn', 'click', function () 
+        { 
+            console.clear();
+            try 
             {
-                eruda.add(erudaFps).show('fps').show();
-            });
+                triggerError(); 
+            } catch (e) 
+            {
+                eruda.show().show('console');
+                throw e;
+            }
+        });
+
+        $event.on('#ajax-btn', 'click', function () 
+        { 
+            ajax.get('test.json');
+            eruda.show().show('network');
+        });
+
+        $event.on('#log-btn', 'click', function ()
+        {
+            console.clear();
+            console.log(navigator);
+            console.log(location);
+            console.log(performance);
+            eruda.show().show('console');
         });
 
         // http://codepen.io/towc/pen/mJzOWJ/

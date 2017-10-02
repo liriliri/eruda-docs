@@ -5,6 +5,19 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Eruda: Console for Mobile Browsers</title>
+    <link rel="apple-touch-icon" sizes="57x57" href="/img/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/img/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/img/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/img/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/img/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/img/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/img/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/img/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/img/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
     <!-- build:style -->
     <link rel="stylesheet" href="style.css">
     <!-- endbuild -->
@@ -24,30 +37,22 @@
 <body>
 <header class="header">
     <canvas id="c"></canvas>
-    <img src="//7xn2zy.com1.z0.glb.clouddn.com/eruda_banner_bg.png"
+    <img src="/img/eruda-banner-bg.png"
          alt="Eruda"/>
     <h1 class="title">Eruda</h1>
     <h2 class="subtitle">Console for Mobile Browsers</h2>
 </header>
 <svg id="triangle" width="800" height="70" viewBox="0,0,80,5"
      preserveAspectRatio="none">
-    <polygon points="0,0 0,5 80,5" style="fill:#fff"/>
+    <polygon points="0,0 0,5 80,5 80,0 60,5 20,5" style="fill:#fff"/>
 </svg>
 <p class="github-link">View it on <a href="https://github.com/liriliri/eruda">GitHub</a>
 </p>
 <p class="hint">Click the right bottom button to inspect this page!</p>
 <ul class="buttons">
-    <li id="error-btn" class="yellow" style="z-index: 100;" ontouchstart>Trigger
-        Error
-    </li>
-    <li id="ajax-btn" class="orange" style="z-index: 90;" ontouchstart>Send Ajax
-        Request
-    </li>
-    <!-- build:fpsBtn -->
-    <li id="fps-btn" class="purple" style="z-index: 80;" data-src="node_modules/eruda-fps/eruda-fps.js" ontouchstart>Load FPS
-        Plugin
-    </li>
-    <!-- endbuild -->
+    <li id="error-btn" class="yellow" style="z-index: 100;" ontouchstart>Trigger Error</li>
+    <li id="ajax-btn" class="orange" style="z-index: 90;" ontouchstart>Send Ajax Request</li>
+    <li id="log-btn" class="purple" style="z-index: 80;" ontouchstart>Log Message</li>
 </ul>
 <!-- build:jsEustia -->
 <script src="eustia.js"></script>

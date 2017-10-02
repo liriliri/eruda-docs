@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "gulp",
-    "serve": "nws -p 3000"
+    "dev": "nws -p 3000"
   },
   "eustia": {
     "files": [],
@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/liriliri/freya#readme",
   "devDependencies": {
-    "eruda": "^1.2.4",
+    "eruda": "^1.2.6",
     "eruda-fps": "^1.0.0",
     "gulp": "^3.9.1",
     "gulp-clean": "^0.3.2",
@@ -34,6 +34,7 @@
     "gulp-htmlmin": "^3.0.0",
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^3.0.0",
+    "nws": "^1.1.1",
     "run-sequence": "^2.1.0"
   }
 }
