@@ -32,7 +32,10 @@
     <!-- build:jsEruda -->
     <script src="node_modules/eruda/eruda.js"></script>
     <!-- endbuild -->
-    <script>eruda.init();</script>
+    <script>
+        eruda.init();
+        eruda.get('console').config.set('displayGetterVal', true);
+    </script>
 </head>
 <body>
 <header class="header">
