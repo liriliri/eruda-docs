@@ -26,7 +26,6 @@
   "homepage": "https://github.com/liriliri/freya#readme",
   "devDependencies": {
     "eruda": "^1.2.6",
-    "eruda-fps": "^1.0.0",
     "gulp": "^3.9.1",
     "gulp-clean": "^0.3.2",
     "gulp-cssmin": "^0.2.0",
