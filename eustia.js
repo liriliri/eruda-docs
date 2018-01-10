@@ -1,6 +1,8 @@
 // Built by eustia.
 window._ = (function()
 {
+    "use strict";
+
     var _ = {};
 
     if (typeof window === 'object' && window._) _ = window._;
@@ -22,6 +24,11 @@ window._ = (function()
          * isObj({}); // -> true
          * isObj([]); // -> true
          * ```
+         */
+
+        /* module
+         * env: all
+         * test: all
          */
 
         function exports(val)
@@ -49,6 +56,11 @@ window._ = (function()
          * isUndef(void 0); // -> true
          * isUndef(null); // -> false
          * ```
+         */
+
+        /* module
+         * env: all
+         * test: all
          */
 
         function exports(val)
@@ -91,6 +103,11 @@ window._ = (function()
          * ```
          */
 
+        /* module
+         * env: all
+         * test: all
+         */
+
         function exports(Class, SuperClass)
         {
             if (objCreate) return Class.prototype = objCreate(SuperClass.prototype);
@@ -123,6 +140,11 @@ window._ = (function()
          * ```
          */
 
+        /* module
+         * env: all
+         * test: all
+         */
+
         var hasOwnProp = Object.prototype.hasOwnProperty;
 
         function exports(obj, key)
@@ -142,6 +164,11 @@ window._ = (function()
          * ```javascript
          * noop(); // Does nothing
          * ```
+         */
+
+        /* module
+         * env: all
+         * test: all
          */
 
         function exports() {}
@@ -167,6 +194,11 @@ window._ = (function()
          * obj.one = 1;
          * allKeys(obj) // -> ['zero', 'one']
          * ```
+         */
+
+        /* module
+         * env: all
+         * test: all
          */
 
         function exports(obj)
@@ -198,6 +230,11 @@ window._ = (function()
          * ```
          */
 
+        /* module
+         * env: all
+         * test: all
+         */
+
         function exports(arr, val, fromIdx)
         {
             return Array.prototype.indexOf.call(arr, val, fromIdx);
@@ -220,6 +257,11 @@ window._ = (function()
          * ```javascript
          * keys({a: 1}); // -> ['a']
          * ```
+         */
+
+        /* module
+         * env: all
+         * test: all
          */
 
         /* dependencies
@@ -246,6 +288,11 @@ window._ = (function()
     var optimizeCb = _.optimizeCb = (function ()
     {
         /* Used for function context binding.
+         */
+
+        /* module
+         * env: all
+         * test: all
          */
 
         /* dependencies
@@ -297,6 +344,11 @@ window._ = (function()
          * ```
          */
 
+        /* module
+         * env: all
+         * test: all
+         */
+
         function exports(val)
         {
             return val;
@@ -319,6 +371,11 @@ window._ = (function()
          * ```javascript
          * objToStr(5); // -> '[object Number]'
          * ```
+         */
+
+        /* module
+         * env: all
+         * test: all
          */
 
         var ObjToStr = Object.prototype.toString;
@@ -349,6 +406,11 @@ window._ = (function()
          * ```
          */
 
+        /* module
+         * env: all
+         * test: all
+         */
+
         /* dependencies
          * objToStr 
          */
@@ -376,6 +438,11 @@ window._ = (function()
          * isArr([]); // -> true
          * isArr({}); // -> false
          * ```
+         */
+
+        /* module
+         * env: all
+         * test: all
          */
 
         /* dependencies
@@ -408,6 +475,11 @@ window._ = (function()
          * castPath('a[0].b'); // -> ['a', '0', 'b']
          * castPath('a.b.c', {'a.b.c': true}); // -> ['a.b.c']
          * ```
+         */
+
+        /* module
+         * env: all
+         * test: all
          */
 
         /* dependencies
@@ -456,6 +528,11 @@ window._ = (function()
          * ```
          */
 
+        /* module
+         * env: all
+         * test: all
+         */
+
         /* dependencies
          * isUndef castPath 
          */
@@ -498,6 +575,11 @@ window._ = (function()
          * ```
          */
 
+        /* module
+         * env: all
+         * test: all
+         */
+
         /* dependencies
          * objToStr 
          */
@@ -528,6 +610,11 @@ window._ = (function()
          * ```
          */
 
+        /* module
+         * env: all
+         * test: all
+         */
+
         /* dependencies
          * objToStr 
          */
@@ -544,7 +631,7 @@ window._ = (function()
 
     var isNum = _.isNum = (function ()
     {
-        /* Checks if value is classified as a Number primitive or object.
+        /* Check if value is classified as a Number primitive or object.
          *
          * |Name  |Type   |Desc                                 |
          * |------|-------|-------------------------------------|
@@ -556,6 +643,11 @@ window._ = (function()
          * isNum(5.1); // -> true
          * isNum({}); // -> false
          * ```
+         */
+
+        /* module
+         * env: all
+         * test: all
          */
 
         /* dependencies
@@ -590,15 +682,20 @@ window._ = (function()
          * ```
          */
 
+        /* module
+         * env: all
+         * test: all
+         */
+
         /* dependencies
-         * isNum has isFn 
+         * isNum isFn 
          */
 
         var MAX_ARR_IDX = Math.pow(2, 53) - 1;
 
         function exports(val)
         {
-            if (!has(val, 'length')) return false;
+            if (!val) return false;
 
             var len = val.length;
 
@@ -612,7 +709,7 @@ window._ = (function()
 
     var each = _.each = (function ()
     {
-        /* Iterates over elements of collection and invokes iteratee for each element.
+        /* Iterate over elements of collection and invokes iteratee for each element.
          *
          * |Name    |Type        |Desc                          |
          * |--------|------------|------------------------------|
@@ -623,6 +720,11 @@ window._ = (function()
          * ```javascript
          * each({'a': 1, 'b': 2}, function (val, key) {});
          * ```
+         */
+
+        /* module
+         * env: all
+         * test: all
          */
 
         /* dependencies
@@ -664,6 +766,11 @@ window._ = (function()
          * |keysFn  |function|Function to get object keys   |
          * |defaults|boolean |No override when set to true  |
          * |return  |function|Result function, extend...    |
+         */
+
+        /* module
+         * env: all
+         * test: all
          */
 
         /* dependencies
@@ -710,6 +817,11 @@ window._ = (function()
          * ```
          */
 
+        /* module
+         * env: all
+         * test: all
+         */
+
         /* dependencies
          * createAssigner allKeys 
          */
@@ -734,6 +846,11 @@ window._ = (function()
          * ```javascript
          * extend({name: 'RedHood'}, {age: 24}); // -> {name: 'RedHood', age: 24}
          * ```
+         */
+
+        /* module
+         * env: all
+         * test: all
          */
 
         /* dependencies
@@ -762,6 +879,11 @@ window._ = (function()
          * ```
          */
 
+        /* module
+         * env: all
+         * test: all
+         */
+
         /* dependencies
          * keys createAssigner 
          */
@@ -785,6 +907,11 @@ window._ = (function()
          * ```javascript
          * values({one: 1, two: 2}); // -> [1, 2]
          * ```
+         */
+
+        /* module
+         * env: all
+         * test: all
          */
 
         /* dependencies
@@ -821,6 +948,11 @@ window._ = (function()
          * ```
          */
 
+        /* module
+         * env: all
+         * test: all
+         */
+
         /* dependencies
          * idxOf isArrLike values 
          */
@@ -846,6 +978,11 @@ window._ = (function()
          * ```
          */
 
+        /* module
+         * env: all
+         * test: all
+         */
+
         exports = typeof window === 'object' &&
                   typeof document === 'object' &&
                   document.nodeType === 9;
@@ -869,6 +1006,11 @@ window._ = (function()
          * isEmpty({}); // -> true
          * isEmpty(''); // -> true
          * ```
+         */
+
+        /* module
+         * env: all
+         * test: all
          */
 
         /* dependencies
@@ -905,6 +1047,11 @@ window._ = (function()
          * ```javascript
          * isMatch({a: 1, b: 2}, {a: 1}); // -> true
          * ```
+         */
+
+        /* module
+         * env: all
+         * test: all
          */
 
         /* dependencies
@@ -949,6 +1096,11 @@ window._ = (function()
          * ltrim('_abc_', '_'); // -> 'abc_'
          * ltrim('_abc_', ['a', '_']); // -> 'bc_'
          * ```
+         */
+
+        /* module
+         * env: all
+         * test: all
          */
 
         var regSpace = /^\s+/;
@@ -1006,6 +1158,11 @@ window._ = (function()
          * ```
          */
 
+        /* module
+         * env: all
+         * test: all
+         */
+
         /* dependencies
          * extendOwn isMatch 
          */
@@ -1028,6 +1185,11 @@ window._ = (function()
     var safeCb = _.safeCb = (function (exports)
     {
         /* Create callback based on input value.
+         */
+
+        /* module
+         * env: all
+         * test: all
          */
 
         /* dependencies
@@ -1075,6 +1237,11 @@ window._ = (function()
          * ```
          */
 
+        /* module
+         * env: all
+         * test: all
+         */
+
         /* dependencies
          * safeCb each 
          */
@@ -1112,6 +1279,11 @@ window._ = (function()
          * ```javascript
          * map([4, 8], function (n) { return n * n; }); // -> [16, 64]
          * ```
+         */
+
+        /* module
+         * env: all
+         * test: all
          */
 
         /* dependencies
@@ -1155,6 +1327,11 @@ window._ = (function()
          * toArr(1); // -> [1]
          * toArr(null); // -> []
          * ```
+         */
+
+        /* module
+         * env: all
+         * test: all
          */
 
         /* dependencies
@@ -1222,6 +1399,11 @@ window._ = (function()
          * a.introduce(); // -> 'I am allen, 17 years old. \n I study at Hogwarts.'
          * Student.is(a); // -> true
          * ```
+         */
+
+        /* module
+         * env: all
+         * test: all
          */
 
         /* dependencies
@@ -1326,6 +1508,11 @@ window._ = (function()
          * ```
          */
 
+        /* module
+         * env: browser
+         * test: browser
+         */
+
         /* dependencies
          * Class isStr each 
          */
@@ -1401,6 +1588,11 @@ window._ = (function()
          * ```
          */
 
+        /* module
+         * env: browser
+         * test: browser
+         */
+
         /* dependencies
          * isStr toArr Select 
          */
@@ -1458,6 +1650,11 @@ window._ = (function()
          *     'attr2': 'test'
          * });
          * ```
+         */
+
+        /* module
+         * env: browser
+         * test: browser
          */
 
         /* dependencies
@@ -1525,6 +1722,11 @@ window._ = (function()
          * ```
          */
 
+        /* module
+         * env: browser
+         * test: browser
+         */
+
         /* dependencies
          * $attr isStr isObj each 
          */
@@ -1579,6 +1781,11 @@ window._ = (function()
          * delegate.add(container, 'click', '.children', clickHandler);
          * delegate.remove(container, 'click', '.children', clickHandler);
          * ```
+         */
+
+        /* module
+         * env: browser
+         * test: browser
          */
 
         /* dependencies
@@ -1750,6 +1957,11 @@ window._ = (function()
          * ```
          */
 
+        /* module
+         * env: browser
+         * test: browser
+         */
+
         /* dependencies
          * delegate isUndef $safeEls 
          */
@@ -1792,6 +2004,11 @@ window._ = (function()
          * ```
          */
 
+        /* module
+         * env: all
+         * test: all
+         */
+
         exports = Date.now || function ()
         {
             return new Date().getTime();
@@ -1816,6 +2033,11 @@ window._ = (function()
          * });
          * raf.cancel(id);
          * ```
+         */
+
+        /* module
+         * env: all
+         * test: all
          */
 
         /* dependencies
@@ -1880,6 +2102,11 @@ window._ = (function()
          * ```
          */
 
+        /* module
+         * env: all
+         * test: all
+         */
+
         var regSpace = /\s+$/;
 
         function exports(str, chars)
@@ -1933,6 +2160,11 @@ window._ = (function()
          * ```
          */
 
+        /* module
+         * env: all
+         * test: all
+         */
+
         /* dependencies
          * ltrim rtrim 
          */
@@ -1978,6 +2210,11 @@ window._ = (function()
          * query.stringify({foo: 'bar', eruda: 'true'}); // -> 'foo=bar&eruda=true'
          * query.parse('name=eruda&name=eustia'); // -> {name: ['eruda', 'eustia']}
          * ```
+         */
+
+        /* module
+         * env: all
+         * test: all
          */
 
         /* dependencies
@@ -2089,6 +2326,11 @@ window._ = (function()
          *     // ...
          * });
          * ```
+         */
+
+        /* module
+         * env: browser
+         * test: manual
          */
 
         /* dependencies
@@ -2249,6 +2491,9 @@ window._ = (function()
             console.log(navigator);
             console.log(location);
             console.log(performance);
+            var arr = [];
+            for (var i = 0; i < 10000; i++) arr.push(i); 
+            console.log(arr);
             eruda.show().show('console');
         });
 

@@ -34,6 +34,9 @@ $event.on('#log-btn', 'click', function ()
     console.log(navigator);
     console.log(location);
     console.log(performance);
+    var arr = [];
+    for (var i = 0; i < 10000; i++) arr.push(i); 
+    console.log(arr);
     eruda.show().show('console');
 });
 
