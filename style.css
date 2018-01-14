@@ -1,7 +1,7 @@
 body, html {
     padding: 0;
     margin: 0;
-    height: 100%;
+    min-height: 100%;
 }
 html {
     background: #f8f9fa;
@@ -10,6 +10,7 @@ body {
     max-width: 800px;
     background: #fff;
     margin: 0 auto;
+    padding-bottom: 20px;
 }
 .header {
     background: #eda29b;
@@ -42,7 +43,7 @@ body {
     color: #555;
     margin-top: 0;
 }
-.title, .subtitle, .github-link, .hint {
+.title, .subtitle, .github-link, .hint, .plugin-title {
     font-family: 'Avenir Next', Avenir, 'Helvetica Neue', Helvetica, 'Franklin Gothic Medium', 'Franklin Gothic', 'ITC Franklin Gothic', Arial, sans-serif;
     text-align: center;
 }
@@ -107,4 +108,30 @@ body {
 }
 .buttons li.purple:active {
     background: #843245;
+}
+.plugin-title {
+    color: #555;
+    margin-top: 50px;
+}
+.plugins {
+    list-style: none;
+    padding: 0 10%;
+    margin: 20px 0;
+    color: #555;
+}
+.plugins h3 {
+    margin: 0;
+    color: #fff;
+    padding: 5px;
+    font-size: 16px;
+}
+.plugins p {
+    padding: 5px;
+    margin: 0;
+    font-size: 14px;
+}
+.plugins li {
+    cursor: pointer;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.08), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
 }

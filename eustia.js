@@ -357,6 +357,37 @@ window._ = (function()
         return exports;
     })();
 
+    /* ------------------------------ upperFirst ------------------------------ */
+
+    var upperFirst = _.upperFirst = (function ()
+    {
+        /* Convert the first character of string to upper case.
+         *
+         * |Name  |Type  |Desc             |
+         * |------|------|-----------------|
+         * |str   |string|String to convert|
+         * |return|string|Converted string |
+         *
+         * ```javascript
+         * upperFirst('red'); // -> Red
+         * ```
+         */
+
+        /* module
+         * env: all
+         * test: all
+         */
+
+        function exports(str)
+        {
+            if (str.length < 1) return str;
+
+            return str[0].toUpperCase() + str.slice(1);
+        }
+
+        return exports;
+    })();
+
     /* ------------------------------ objToStr ------------------------------ */
 
     var objToStr = _.objToStr = (function ()
@@ -396,7 +427,7 @@ window._ = (function()
          *
          * |Name  |Type   |Desc                                |
          * |------|-------|------------------------------------|
-         * |value |*      |Value to check                      |
+         * |val   |*      |Value to check                      |
          * |return|boolean|True if value is an arguments object|
          *
          * ```javascript
@@ -635,7 +666,7 @@ window._ = (function()
          *
          * |Name  |Type   |Desc                                 |
          * |------|-------|-------------------------------------|
-         * |value |*      |Value to check                       |
+         * |val   |*      |Value to check                       |
          * |return|boolean|True if value is correctly classified|
          * 
          * ```javascript
@@ -670,7 +701,7 @@ window._ = (function()
          *
          * |Name  |Type   |Desc                       |
          * |------|-------|---------------------------|
-         * |value |*      |Value to check             |
+         * |val   |*      |Value to check             |
          * |return|boolean|True if value is array like|
          *
          * > Function returns false.
@@ -967,29 +998,6 @@ window._ = (function()
         return exports;
     })();
 
-    /* ------------------------------ isBrowser ------------------------------ */
-
-    var isBrowser = _.isBrowser = (function (exports)
-    {
-        /* Check if running in a browser.
-         *
-         * ```javascript
-         * console.log(isBrowser); // -> true if running in a browser
-         * ```
-         */
-
-        /* module
-         * env: all
-         * test: all
-         */
-
-        exports = typeof window === 'object' &&
-                  typeof document === 'object' &&
-                  document.nodeType === 9;
-
-        return exports;
-    })({});
-
     /* ------------------------------ isEmpty ------------------------------ */
 
     var isEmpty = _.isEmpty = (function ()
@@ -1031,6 +1039,29 @@ window._ = (function()
 
         return exports;
     })();
+
+    /* ------------------------------ isBrowser ------------------------------ */
+
+    var isBrowser = _.isBrowser = (function (exports)
+    {
+        /* Check if running in a browser.
+         *
+         * ```javascript
+         * console.log(isBrowser); // -> true if running in a browser
+         * ```
+         */
+
+        /* module
+         * env: all
+         * test: all
+         */
+
+        exports = typeof window === 'object' &&
+                  typeof document === 'object' &&
+                  document.nodeType === 9;
+
+        return exports;
+    })({});
 
     /* ------------------------------ isMatch ------------------------------ */
 
@@ -2272,6 +2303,236 @@ window._ = (function()
         return exports;
     })({});
 
+    /* ------------------------------ Url ------------------------------ */
+
+    var Url = _.Url = (function (exports)
+    {
+        /* Simple url manipulator.
+         *
+         * ### constructor
+         *
+         * |Name                 |Type  |Desc      |
+         * |---------------------|------|----------|
+         * |[url=window.location]|string|Url string|
+         *
+         * ### setQuery
+         *
+         * Set query value.
+         *
+         * |Name  |Type  |Desc       |
+         * |------|------|-----------|
+         * |name  |string|Query name |
+         * |value |string|Query value|
+         * |return|Url   |this       |
+         *
+         * |Name  |Type  |Desc        |
+         * |------|------|------------|
+         * |names |object|query object|
+         * |return|Url   |this        |
+         *
+         * ### rmQuery
+         *
+         * Remove query value.
+         *
+         * |Name  |Type        |Desc      |
+         * |------|------------|----------|
+         * |name  |string array|Query name|
+         * |return|Url         |this      |
+         *
+         * ### parse
+         *
+         * [static] Parse url into an object.
+         *
+         * |Name  |Type  |Desc      |
+         * |------|------|----------|
+         * |url   |string|Url string|
+         * |return|object|Url object|
+         *
+         * ### stringify
+         *
+         * [static] Stringify url object into a string.
+         *
+         * |Name  |Type  |Desc      |
+         * |------|------|----------|
+         * |url   |object|Url object|
+         * |return|string|Url string|
+         *
+         * An url object contains the following properties:
+         *
+         * |Name    |Desc                                                                                  |
+         * |--------|--------------------------------------------------------------------------------------|
+         * |protocol|The protocol scheme of the URL (e.g. http:)                                           |
+         * |slashes |A boolean which indicates whether the protocol is followed by two forward slashes (//)|
+         * |auth    |Authentication information portion (e.g. username:password)                           |
+         * |hostname|Host name without port number                                                         |
+         * |port    |Optional port number                                                                  |
+         * |pathname|URL path                                                                              |
+         * |query   |Parsed object containing query string                                                 |
+         * |hash    |The "fragment" portion of the URL including the pound-sign (#)                        |
+         *
+         * ```javascript
+         * var url = new Url('http://example.com:8080?eruda=true');
+         * console.log(url.port); // -> '8080'
+         * url.query.foo = 'bar';
+         * url.rmQuery('eruda');
+         * utl.toString(); // -> 'http://example.com:8080/?foo=bar'
+         * ```
+         */
+
+        /* module
+         * env: all
+         * test: all
+         */
+
+        /* dependencies
+         * Class extend trim query isEmpty each isArr toArr 
+         */
+
+        exports = Class({
+            className: 'Url',
+            initialize: function (url)
+            {
+                extend(this, exports.parse(url || window.location.href));
+            },
+            setQuery: function (name, val)
+            {
+                var query = this.query;
+
+                if (isObj(name))
+                {
+                    each(name, function (val, key)
+                    {
+                        query[key] = val;
+                    });
+                } else
+                {
+                    query[name] = val;
+                }
+
+                return this;
+            },
+            rmQuery: function (name)
+            {
+                var query = this.query;
+
+                if (!isArr(name)) name = toArr(name);
+                each(name, function (key)
+                {
+                    delete query[key];
+                });
+
+                return this;
+            },
+            toString: function ()
+            {
+                return exports.stringify(this);
+            }
+        }, {
+            parse: function (url)
+            {
+                var ret = {
+                        protocol: '',
+                        auth: '',
+                        hostname: '',
+                        hash: '',
+                        query: {},
+                        port: '',
+                        pathname: '',
+                        slashes: false
+                    },
+                    rest = trim(url);
+
+                var proto = rest.match(regProto);
+                if (proto)
+                {
+                    proto = proto[0];
+                    ret.protocol = proto.toLowerCase();
+                    rest = rest.substr(proto.length);
+                }
+
+                if (proto)
+                {
+                    var slashes = rest.substr(0, 2) === '//';
+                    if (slashes)
+                    {
+                        rest = rest.slice(2);
+                        ret.slashes = true;
+                    }
+                }
+
+                if (slashes)
+                {
+                    var hostEnd = -1;
+                    for (var i = 0, len = hostEndingChars.length; i < len; i++)
+                    {
+                        var pos = rest.indexOf(hostEndingChars[i]);
+                        if (pos !== -1 && (hostEnd === -1 || pos < hostEnd)) hostEnd = pos;
+                    }
+
+                    var host = rest.slice(0, hostEnd);
+                    rest = rest.slice(hostEnd);
+
+                    var atSign = host.lastIndexOf('@');
+
+                    if (atSign !== -1)
+                    {
+                        ret.auth = decodeURIComponent(host.slice(0, atSign));
+                        host = host.slice(atSign + 1);
+                    }
+
+                    ret.hostname = host;
+                    var port = host.match(regPort);
+                    if (port)
+                    {
+                        port = port[0];
+                        if (port !== ':') ret.port = port.substr(1);
+                        ret.hostname = host.substr(0, host.length - port.length);
+                    }
+                }
+
+                var hash = rest.indexOf('#');
+
+                if (hash !== -1)
+                {
+                    ret.hash = rest.substr(hash);
+                    rest = rest.slice(0, hash);
+                }
+
+                var queryMark = rest.indexOf('?');
+
+                if (queryMark !== -1)
+                {
+                    ret.query = query.parse(rest.substr(queryMark + 1));
+                    rest = rest.slice(0, queryMark);
+                }
+
+                ret.pathname = rest || '/';
+
+                return ret;
+            },
+            stringify: function (obj)
+            {
+                var ret = obj.protocol +
+                          (obj.slashes ? '//' : '') +
+                          (obj.auth ? encodeURIComponent(obj.auth) + '@' : '') +
+                          obj.hostname +
+                          (obj.port ? (':' + obj.port) : '') +
+                          obj.pathname;
+
+                if (!isEmpty(obj.query)) ret += '?' + query.stringify(obj.query);
+                if (obj.hash) ret += obj.hash;
+
+                return ret;
+            }
+        });
+
+        var regProto = /^([a-z0-9.+-]+:)/i,
+            regPort = /:[0-9]*$/,
+            hostEndingChars = ['/', '?', '#'];
+
+        return exports;
+    })({});
+
     /* ------------------------------ ajax ------------------------------ */
 
     var ajax = _.ajax = (function ()
@@ -2454,7 +2715,7 @@ window._ = (function()
     (function ()
     {
         /* dependencies
-         * $event raf Class $data ajax 
+         * $event raf Class $data ajax upperFirst Url 
          */
 
         console.log.apply(console, [
@@ -2496,6 +2757,21 @@ window._ = (function()
             console.log(arr);
             eruda.show().show('console');
         });
+
+        $event.on('.plugins li', 'click', function ()
+        {
+            showPlugin($data(this, 'plugin'));
+        });
+
+        function showPlugin(plugin) 
+        {
+            eruda.show();
+            if (eruda.get(plugin)) eruda.show(plugin);
+            eruda.get('snippets').run('Load ' + upperFirst(plugin) + ' Plugin');
+        }
+
+        var url = new Url();
+        if (url.query.plugin) showPlugin(url.query.plugin);
 
         // http://codepen.io/towc/pen/mJzOWJ/
         var c = document.getElementById('c');

@@ -1,4 +1,4 @@
-_('$event raf Class $data ajax');
+_('$event raf Class $data ajax upperFirst Url');
 
 console.log.apply(console, [
     '%c %c %c Hello, this is Eruda :) %c %c ',
@@ -39,6 +39,21 @@ $event.on('#log-btn', 'click', function ()
     console.log(arr);
     eruda.show().show('console');
 });
+
+$event.on('.plugins li', 'click', function ()
+{
+    showPlugin($data(this, 'plugin'));
+});
+
+function showPlugin(plugin) 
+{
+    eruda.show();
+    if (eruda.get(plugin)) eruda.show(plugin);
+    eruda.get('snippets').run('Load ' + upperFirst(plugin) + ' Plugin');
+}
+
+var url = new Url();
+if (url.query.plugin) showPlugin(url.query.plugin);
 
 // http://codepen.io/towc/pen/mJzOWJ/
 var c = document.getElementById('c');
