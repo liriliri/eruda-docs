@@ -111,18 +111,19 @@ body {
 }
 .plugin-title {
     color: #555;
-    margin-top: 30px;
+    margin-top: 50px;
 }
 .plugins {
     list-style: none;
     margin: 20px 0;
     padding: 0;
     color: #555;
+    margin-bottom: 40px;
 }
 .plugins h3 {
     margin: 0;
-    color: #fff;
     padding: 5px;
+    text-decoration: underline;
     font-size: 18px;
 }
 .plugins p {
@@ -132,6 +133,7 @@ body {
 }
 .plugins li {
     cursor: pointer;
-    margin-bottom: 10px;
+    margin: 0 6% 15px 6%;
+    margin-bottom: 20px;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.08), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
 }
