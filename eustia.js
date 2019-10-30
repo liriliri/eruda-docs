@@ -2919,7 +2919,7 @@ window._ = (function()
             eruda.show().show('network');
         });
 
-        let differentLogs = true;
+        var differentLogs = true;
 
         $event.on('#log-btn', 'click', function() {
             differentLogs ? logDifferently() : logMassively();
@@ -2965,7 +2965,7 @@ window._ = (function()
 
         function logMassively() {
             console.clear();
-            for (let i = 0; i < 5120; i++) {
+            for (var i = 0; i < 5120; i++) {
                 console.log('Number: ', i);
             }
         }
