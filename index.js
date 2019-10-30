@@ -24,7 +24,15 @@ $event.on('#ajax-btn', 'click', function() {
     eruda.show().show('network');
 });
 
+let differentLogs = true;
+
 $event.on('#log-btn', 'click', function() {
+    differentLogs ? logDifferently() : logMassively();
+    differentLogs = !differentLogs;
+    eruda.show().show('console');
+});
+
+function logDifferently() {
     console.clear();
     console.log('log');
     console.warn('warn');
@@ -58,8 +66,14 @@ $event.on('#log-btn', 'click', function() {
     var arr = [];
     for (var i = 0; i < 10000; i++) arr.push(i);
     console.log(arr);
-    eruda.show().show('console');
-});
+}
+
+function logMassively() {
+    console.clear();
+    for (let i = 0; i < 5120; i++) {
+        console.log('Number: ', i);
+    }
+}
 
 $event.on('.plugins li', 'click', function() {
     showPlugin($data(this, 'plugin'));
