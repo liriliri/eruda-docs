@@ -70,7 +70,7 @@ function logDifferently() {
 
 function logMassively() {
     console.clear();
-    for (var i = 0; i < 5120; i++) {
+    for (var i = 0; i < 10000; i++) {
         console.log('Number: ', i);
     }
 }
