@@ -26,16 +26,16 @@
   },
   "homepage": "https://github.com/liriliri/freya#readme",
   "devDependencies": {
-    "eruda": "^1.7.0",
-    "gulp": "^3.9.1",
-    "gulp-clean": "^0.3.2",
+    "eruda": "^1.10.2",
+    "gulp": "^4.0.2",
+    "gulp-clean": "^0.4.0",
     "gulp-cssmin": "^0.2.0",
     "gulp-html-replace": "^1.6.2",
-    "gulp-htmlmin": "^3.0.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^3.0.0",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-rename": "^1.4.0",
+    "gulp-uglify": "^3.0.2",
+    "gulp4-run-sequence": "^1.0.0",
     "nws": "^1.1.1",
-    "prettier": "^1.18.2",
-    "run-sequence": "^2.1.0"
+    "prettier": "^1.18.2"
   }
 }

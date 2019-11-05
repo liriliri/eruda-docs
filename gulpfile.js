@@ -1,5 +1,5 @@
 var gulp = require('gulp'),
-    runSequence = require('run-sequence'),
+    runSequence = require('gulp4-run-sequence'),
     cssmin = require('gulp-cssmin'),
     uglify = require('gulp-uglify'),
     htmlmin = require('gulp-htmlmin'),
@@ -9,7 +9,9 @@ var gulp = require('gulp'),
 
 gulp.task('clean', function () 
 {
-    return gulp.src('dist').pipe(clean());
+    return gulp.src('dist', {
+        allowEmpty: true
+    }).pipe(clean());
 });    
 
 gulp.task('html', function () 
@@ -46,8 +48,7 @@ gulp.task('js', function ()
 gulp.task('copy', function () 
 {
     var src = [
-        'node_modules/eruda/eruda.min.js',
-        'node_modules/eruda-fps/eruda-fps.min.js',
+        'node_modules/eruda/eruda.js',
         'favicon.ico',
         'test.json',
         'im*/*.png'
