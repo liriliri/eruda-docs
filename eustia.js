@@ -2919,7 +2919,15 @@ window._ = (function()
             eruda.show().show('network');
         });
 
+        var differentLogs = true;
+
         $event.on('#log-btn', 'click', function() {
+            differentLogs ? logDifferently() : logMassively();
+            differentLogs = !differentLogs;
+            eruda.show().show('console');
+        });
+
+        function logDifferently() {
             console.clear();
             console.log('log');
             console.warn('warn');
@@ -2953,8 +2961,14 @@ window._ = (function()
             var arr = [];
             for (var i = 0; i < 10000; i++) arr.push(i);
             console.log(arr);
-            eruda.show().show('console');
-        });
+        }
+
+        function logMassively() {
+            console.clear();
+            for (var i = 0; i < 10000; i++) {
+                console.log('Number: ', i);
+            }
+        }
 
         $event.on('.plugins li', 'click', function() {
             showPlugin($data(this, 'plugin'));
