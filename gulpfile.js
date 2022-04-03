@@ -51,7 +51,8 @@ gulp.task('copy', function ()
         'node_modules/eruda/eruda.js',
         'favicon.ico',
         'test.json',
-        'im*/*.png'
+        'im*/*.png',
+        'im*/*.jpg'
     ];
 
     return gulp.src(src)
