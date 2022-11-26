@@ -51,7 +51,7 @@ function logDifferently() {
     var site2 = { name: 'Google', site: 'www.google.com' };
     var site3 = { name: 'Taobao', site: 'www.taobao.com' };
     console.table([site1, site2, site3], ['site']);
-    const el = toEl(
+    var el = toEl(
         '<div class="test"><div class="test-inner"></div></div>'
     );
     console.log('test dom', el);
