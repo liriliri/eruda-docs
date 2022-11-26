@@ -1,4 +1,4 @@
-_('$event raf Class $data ajax upperFirst Url');
+_('$event raf Class $data ajax upperFirst Url toEl');
 
 console.log.apply(console, [
     '%c %c %c Hello, this is Eruda :) %c %c ',
@@ -35,20 +35,27 @@ $event.on('#log-btn', 'click', function() {
 function logDifferently() {
     console.clear();
     console.log('log');
+    for (let i = 0; i < 10; i++) {
+        console.log('repeat log');
+    }
     console.warn('warn');
     console.error(Error('test'));
     console.info('info');
     console.debug('debug');
-    console.dir(document.createElement('div'));
     console.time('test');
     console.timeEnd('test');
-    console.count('eruda');
-    console.count('eruda');
+    console.count('luna');
+    console.count('luna');
     console.assert(true, 'assert msg');
     var site1 = { name: 'Runoob', site: 'www.runoob.com' };
     var site2 = { name: 'Google', site: 'www.google.com' };
     var site3 = { name: 'Taobao', site: 'www.taobao.com' };
     console.table([site1, site2, site3], ['site']);
+    const el = toEl(
+        '<div class="test"><div class="test-inner"></div></div>'
+    );
+    console.log('test dom', el);
+    console.dir(el);
     console.log('%c Oh my heavens!', 'background: #222; color: #bada55');
     console.log('This is the outer level');
     console.group();
@@ -60,9 +67,12 @@ function logDifferently() {
     console.log('Back to level 2');
     console.groupEnd();
     console.log('Back to the outer level');
-    console.log(navigator);
-    console.log(location);
-    console.log(performance);
+    console.log(
+        'navigator: %o location: %o performance: %o',
+        navigator,
+        location,
+        performance
+    );
     var arr = [];
     for (var i = 0; i < 10000; i++) arr.push(i);
     console.log(arr);
