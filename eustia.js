@@ -3197,7 +3197,7 @@ window._ = (function()
         function logDifferently() {
             console.clear();
             console.log('log');
-            for (let i = 0; i < 10; i++) {
+            for (var i = 0; i < 10; i++) {
                 console.log('repeat log');
             }
             console.warn('warn');
