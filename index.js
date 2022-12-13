@@ -35,7 +35,6 @@ $event.on('#log-btn', 'click', function () {
 function logDifferently() {
     console.clear();
     console.log('log');
-    console.log('log');
     console.log('number:', 5);
     console.log('boolean:', true, false);
     console.log('null:', null);
