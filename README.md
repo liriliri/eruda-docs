@@ -1,4 +1,4 @@
-# freya
+# Eruda docs 
 
 Eruda official site: [eruda.liriliri.io](http://eruda.liriliri.io)
 

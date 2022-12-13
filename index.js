@@ -6,10 +6,10 @@ console.log.apply(console, [
     'background: #707d8b; padding:5px 0;',
     'color: #fff; background: #76a2ee; padding: 5px 0;',
     'background: #707d8b; padding:5px 0;',
-    'background: #707d8b; padding:5px 0;'
+    'background: #707d8b; padding:5px 0;',
 ]);
 
-$event.on('#error-btn', 'click', function() {
+$event.on('#error-btn', 'click', function () {
     console.clear();
     try {
         triggerError();
@@ -19,14 +19,14 @@ $event.on('#error-btn', 'click', function() {
     }
 });
 
-$event.on('#ajax-btn', 'click', function() {
+$event.on('#ajax-btn', 'click', function () {
     ajax.get('test.json');
     eruda.show().show('network');
 });
 
 var differentLogs = true;
 
-$event.on('#log-btn', 'click', function() {
+$event.on('#log-btn', 'click', function () {
     differentLogs ? logDifferently() : logMassively();
     differentLogs = !differentLogs;
     eruda.show().show('console');
@@ -35,6 +35,12 @@ $event.on('#log-btn', 'click', function() {
 function logDifferently() {
     console.clear();
     console.log('log');
+    console.log('log');
+    console.log('number:', 5);
+    console.log('boolean:', true, false);
+    console.log('null:', null);
+    console.log('undefined:', undefined);
+    console.log('regexp:', /test/gi);
     for (var i = 0; i < 10; i++) {
         console.log('repeat log');
     }
@@ -51,9 +57,7 @@ function logDifferently() {
     var site2 = { name: 'Google', site: 'www.google.com' };
     var site3 = { name: 'Taobao', site: 'www.taobao.com' };
     console.table([site1, site2, site3], ['site']);
-    var el = toEl(
-        '<div class="test"><div class="test-inner"></div></div>'
-    );
+    var el = toEl('<div class="test"><div class="test-inner"></div></div>');
     console.log('test dom', el);
     console.dir(el);
     console.log('%c Oh my heavens!', 'background: #222; color: #bada55');
@@ -85,7 +89,7 @@ function logMassively() {
     }
 }
 
-$event.on('.plugins li', 'click', function() {
+$event.on('.plugins li', 'click', function () {
     showPlugin($data(this, 'plugin'));
 });
 
@@ -122,7 +126,7 @@ var w = (c.width = getCanvasWidth()),
         cx: w / 2,
         cy: h / 2,
         repaintAlpha: 0.04,
-        hueChange: 0.1
+        hueChange: 0.1,
     },
     tick = 0,
     lines = [],
@@ -147,17 +151,17 @@ function loop() {
     if (lines.length < opts.count && Math.random() < opts.spawnChance)
         lines.push(new Line());
 
-    lines.map(function(line) {
+    lines.map(function (line) {
         line.step();
     });
 }
 
 var Line = Class({
     className: 'Line',
-    initialize: function() {
+    initialize: function () {
         this.reset();
     },
-    reset: function() {
+    reset: function () {
         this.x = 0;
         this.y = 0;
         this.addedX = 0;
@@ -174,7 +178,7 @@ var Line = Class({
 
         this.beginPhase();
     },
-    beginPhase: function() {
+    beginPhase: function () {
         this.x += this.addedX;
         this.y += this.addedY;
 
@@ -195,7 +199,7 @@ var Line = Class({
             this.reset();
         }
     },
-    step: function() {
+    step: function () {
         ++this.time;
         ++this.cumulativeTime;
 
@@ -237,12 +241,12 @@ var Line = Class({
                 opts.sparkSize,
                 opts.sparkSize
             );
-    }
+    },
 });
 
 loop();
 
-window.addEventListener('resize', function() {
+window.addEventListener('resize', function () {
     w = c.width = getCanvasWidth();
     h = c.height = 210;
     ctx.fillStyle = '#eda29b';
