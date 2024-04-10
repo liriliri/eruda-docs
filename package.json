@@ -1,5 +1,5 @@
 {
-  "name": "freya",
+  "name": "eruda-docs",
   "version": "0.0.1",
   "description": "Eruda website",
   "main": "index.js",
@@ -17,14 +17,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/liriliri/freya.git"
+    "url": "git+https://github.com/liriliri/eruda-docs.git"
   },
   "author": "surunzi",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/liriliri/freya/issues"
+    "url": "https://github.com/liriliri/eruda-docs/issues"
   },
-  "homepage": "https://github.com/liriliri/freya#readme",
+  "homepage": "https://github.com/liriliri/eruda-docs#readme",
   "devDependencies": {
     "eruda": "^3.0.0",
     "gulp": "^4.0.2",
