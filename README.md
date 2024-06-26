@@ -1,10 +1,6 @@
-# Eruda docs 
-
-Eruda official site: [eruda.liriliri.io](http://eruda.liriliri.io)
+# eruda.liriliri.io 
 
 ```bash
-# Run a local server on port 3000.
+npm i
 npm run dev
-# Build dist files.
-npm run build
 ```

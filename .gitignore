@@ -1,5 +1,3 @@
 node_modules/
-dist/
-eustia/cache/
-.idea/
+docs/.vitepress/cache/
 package-lock.json
