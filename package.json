@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vitepress dev docs",
     "build": "vitepress build docs",
-    "init": "",
+    "init": "lsla shx cp node_modules/eruda/eruda.js docs/public/eruda.js",
     "format": "lsla prettier \"*.json\" \"docs/**/*.{mts,js,vue,css}\" --write"
   },
   "repositor": {
@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/liriliri/eruda-docs#readme",
   "devDependencies": {
+    "eruda": "latest",
+    "licia": "^1.41.0",
     "vitepress": "^1.2.3"
   }
 }

@@ -11,4 +11,28 @@ export default defineConfig({
       height: 48,
     },
   },
+  head: [
+    [
+      'script',
+      {
+        src: '/eruda.js',
+        onload: 'eruda.init()',
+      },
+    ],
+    [
+      'script',
+      {
+        async: '',
+        src: 'https://www.googletagmanager.com/gtag/js?id=G-KGLJXEGV2X',
+      },
+    ],
+    [
+      'script',
+      {},
+      `window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-KGLJXEGV2X');`,
+    ],
+  ],
 })
