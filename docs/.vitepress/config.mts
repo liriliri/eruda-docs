@@ -10,6 +10,12 @@ export default defineConfig({
       width: 48,
       height: 48,
     },
+    socialLinks: [
+      {
+        icon: 'github',
+        link: 'https://github.com/liriliri/eruda',
+      },
+    ],
   },
   head: [
     [

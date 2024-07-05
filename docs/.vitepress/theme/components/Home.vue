@@ -139,9 +139,6 @@ if (plugin) {
         style="fill: var(--vp-c-bg)"
       />
     </svg>
-    <p class="github-link">
-      View it on <a href="https://github.com/liriliri/eruda">GitHub</a>
-    </p>
     <p class="hint">Click the right bottom button to inspect this page!</p>
     <ul class="buttons">
       <li
@@ -243,14 +240,8 @@ if (plugin) {
   top: -50px;
   margin-bottom: -25px;
 }
-.github-link {
-  font-size: 14px;
-  color: var(--vp-c-text-1);
-  margin-top: 0;
-}
 .title,
 .subtitle,
-.github-link,
 .hint,
 .plugin-title,
 .plugins {
@@ -280,10 +271,6 @@ if (plugin) {
   margin-bottom: 50px;
   text-decoration: underline;
   font-weight: 700;
-}
-.github-link a {
-  color: #76a2ee;
-  font-size: 18px;
 }
 .hint {
   color: var(--vp-c-text-1);
