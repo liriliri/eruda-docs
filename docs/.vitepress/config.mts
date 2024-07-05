@@ -10,6 +10,23 @@ export default defineConfig({
       width: 48,
       height: 48,
     },
+    nav: [{ text: 'Docs', link: '/docs/' }],
+    sidebar: {
+      '/docs': [
+        {
+          text: 'Introduction',
+          link: '/docs/',
+        },
+        {
+          text: 'API',
+          link: '/docs/api',
+        },
+        {
+          text: 'Writing a Plugin',
+          link: '/docs/plugin',
+        }
+      ],
+    },
     socialLinks: [
       {
         icon: 'github',
