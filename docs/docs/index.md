@@ -65,7 +65,7 @@ When initialization, a configuration object can be passed in.
 under html root element.
 * tool: Choose which default tools you want, by default all will be added.
 
-For more information, please check the [documentation](doc/API.md).
+For more information, please check the [documentation](/docs/api.md).
 
 ```javascript
 let el = document.createElement('div');
