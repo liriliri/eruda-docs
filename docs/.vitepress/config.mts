@@ -24,7 +24,7 @@ export default defineConfig({
         {
           text: 'Writing a Plugin',
           link: '/docs/plugin',
-        }
+        },
       ],
     },
     socialLinks: [
@@ -33,6 +33,36 @@ export default defineConfig({
         link: 'https://github.com/liriliri/eruda',
       },
     ],
+  },
+  locales: {
+    root: {
+      label: 'English',
+      lang: 'en',
+    },
+    zh: {
+      label: '中文',
+      lang: 'zh',
+      themeConfig: {
+        outlineTitle: '在这一页上',
+        nav: [{ text: '文档', link: '/zh/docs/' }],
+        sidebar: {
+          '/zh/docs/': [
+            {
+              text: '简介',
+              link: '/zh/docs/',
+            },
+            {
+              text: 'API',
+              link: '/docs/api',
+            },
+            {
+              text: '插件开发',
+              link: '/docs/plugin',
+            },
+          ],
+        },
+      },
+    },
   },
   head: [
     [
