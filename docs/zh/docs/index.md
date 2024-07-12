@@ -65,6 +65,14 @@ JS 文件对于移动端来说略重（gzip 后大概 100kb）。建议通过 ur
 })();
 ```
 
+如果你使用的是现代 JavaScript 技术栈，可以像下边这样动态引入。
+
+```javascript
+if (import.meta.env.MODE === 'development') {
+    import('eruda').then(eruda => eruda.default.init());
+}
+```
+
 初始化时可以传入配置：
 * container: 用于插件初始化的 Dom 元素，如果不设置，默认创建 div 作为容器直接置于 html 根结点下面。
 * tool：指定要初始化哪些面板，默认加载所有。

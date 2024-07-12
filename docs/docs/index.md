@@ -57,6 +57,14 @@ The JavaScript file size is quite huge(about 100kb gzipped) and therefore not su
 })();
 ```
 
+If you are using modern JavaScript tooling, you can dynamically import it.
+
+```javascript
+if (import.meta.env.MODE === 'development') {
+    import('eruda').then(eruda => eruda.default.init());
+}
+```
+
 ## Configuration
 
 When initialization, a configuration object can be passed in.

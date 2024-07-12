@@ -113,6 +113,14 @@ function showPlugin(plugin) {
   eruda.get('snippets').run('Load ' + upperFirst(plugin) + ' Plugin')
 }
 
+function showEruda() {
+  if (typeof eruda === 'undefined') {
+    return
+  }
+
+  eruda.show()
+}
+
 const plugin = getUrlParam('plugin')
 if (plugin) {
   setTimeout(() => showPlugin(plugin), 2000)
@@ -139,7 +147,21 @@ if (plugin) {
         style="fill: var(--vp-c-bg)"
       />
     </svg>
-    <p class="hint">Click the right bottom button to inspect this page!</p>
+    <p class="hint">
+      Click the
+      <span
+        class="eruda-icon-tool"
+        @click="showEruda"
+        style="
+          background: black;
+          color: #fff;
+          width: 25px;
+          height: 25px;
+          border-radius: 4px;
+        "
+      ></span>
+      button to inspect this page!
+    </p>
     <ul class="buttons">
       <li
         id="error-btn"
