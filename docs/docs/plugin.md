@@ -104,3 +104,24 @@ Check if value is eruda container element.
 ```javascript
 isErudaEl(document.body); // -> false
 ```
+
+### getTheme
+
+Get current theme name.
+
+```javascript
+getTheme(); // -> 'Light'
+```
+
+### isDarkTheme
+
+Check eruda is using a dark theme.
+
+|Name  |Desc                         |
+|------|-----------------------------|
+|theme |Theme name                   |
+|return|True if theme is a dark theme|
+
+```javascript
+isDarkTheme('Dark'); // -> true
+```
