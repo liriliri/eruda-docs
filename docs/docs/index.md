@@ -95,5 +95,6 @@ eruda.init({
 * [eruda-geolocation](https://github.com/liriliri/eruda-geolocation): Test geolocation.
 * [eruda-orientation](https://github.com/liriliri/eruda-orientation): Test orientation api.
 * [eruda-touches](https://github.com/liriliri/eruda-touches): Visualize screen touches.
+* [eruda-vue](https://github.com/liriliri/eruda-vue): Vue devtools.
 
 If you want to create a plugin yourself, follow the guides [here](/docs/plugin.md).

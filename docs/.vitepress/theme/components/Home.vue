@@ -193,6 +193,10 @@ if (plugin) {
     </ul>
     <h2 class="plugin-title">PLUGINS</h2>
     <ul class="plugins">
+      <li @click="showPlugin('vue')">
+        <h3 style="border-top: 5px solid #212121">VUE</h3>
+        <p>Vue devtools</p>
+      </li>
       <li @click="showPlugin('monitor')">
         <h3 style="border-top: 5px solid #212121">MONITOR</h3>
         <p>Display fps and memory</p>
