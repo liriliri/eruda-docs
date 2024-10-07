@@ -2,8 +2,9 @@ import { defineConfig } from 'vitepress'
 import * as fs from 'fs'
 import * as path from 'path'
 
-const icon = (name: string) =>
-  fs.readFileSync(path.resolve(__dirname, `./${name}.svg`), 'utf8')
+const icon = (name: string) => {
+  return fs.readFileSync(path.resolve(__dirname, `${name}.svg`), 'utf8')
+}
 
 export default defineConfig({
   title: 'Eruda',
@@ -17,7 +18,7 @@ export default defineConfig({
     },
     nav: [{ text: 'Docs', link: '/docs/' }],
     sidebar: {
-      '/docs': [
+      '/docs/': [
         {
           text: 'Introduction',
           link: '/docs/',
