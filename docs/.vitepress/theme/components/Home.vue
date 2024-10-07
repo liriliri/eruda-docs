@@ -4,6 +4,9 @@ import ajax from 'licia/ajax'
 import upperFirst from 'licia/upperFirst'
 import getUrlParam from 'licia/getUrlParam'
 import initCanvas from '../lib/canvas'
+import { useData } from 'vitepress'
+
+const t = (en, zh) => (useData().lang.value === 'zh' ? zh : en)
 
 const canvas = ref(null)
 
@@ -133,7 +136,9 @@ if (plugin) {
       <canvas id="c" ref="canvas"></canvas>
       <img src="/banner-bg.png" alt="Eruda" />
       <h1 class="title">Eruda</h1>
-      <h2 class="subtitle">Console for Mobile Browsers</h2>
+      <h2 class="subtitle">
+        {{ t('Console for Mobile Browsers', '移动端调试工具') }}
+      </h2>
     </header>
     <svg
       id="triangle"
@@ -148,7 +153,7 @@ if (plugin) {
       />
     </svg>
     <p class="hint">
-      Click the
+      {{ t('Click the', '点击') }}
       <span
         class="eruda-icon-tool"
         @click="showEruda"
@@ -160,7 +165,7 @@ if (plugin) {
           border-radius: 4px;
         "
       ></span>
-      button to inspect this page!
+      {{ t('button to inspect this page!', '按钮开始调试本页面！') }}
     </p>
     <ul class="buttons">
       <li
@@ -170,7 +175,7 @@ if (plugin) {
         style="z-index: 10"
         ontouchstart
       >
-        Trigger Error
+        {{ t('Trigger Error', '触发错误') }}
       </li>
       <li
         id="ajax-btn"
@@ -179,7 +184,7 @@ if (plugin) {
         style="z-index: 9"
         ontouchstart
       >
-        Send Ajax Request
+        {{ t('Send Ajax Request', '发送 Ajax 请求') }}
       </li>
       <li
         id="log-btn"
@@ -188,46 +193,50 @@ if (plugin) {
         style="z-index: 8"
         ontouchstart
       >
-        Log Message
+        {{ t('打印信息', 'Log Message') }}
       </li>
     </ul>
-    <h2 class="plugin-title">PLUGINS</h2>
+    <h2 class="plugin-title">{{ t('PLUGINS', '插件') }}</h2>
     <ul class="plugins">
       <li @click="showPlugin('vue')">
         <h3 style="border-top: 5px solid #212121">VUE</h3>
-        <p>Vue devtools</p>
+        <p>{{ t('Vue devtools', 'Vue 调试工具') }}</p>
       </li>
       <li @click="showPlugin('monitor')">
         <h3 style="border-top: 5px solid #212121">MONITOR</h3>
-        <p>Display fps and memory</p>
+        <p>{{ t('Display fps and memory', '显示帧率和内存') }}</p>
       </li>
       <li @click="showPlugin('features')">
         <h3 style="border-top: 5px solid #424242">FEATURES</h3>
-        <p>Browser feature detections</p>
+        <p>{{ t('Browser feature detections', '浏览器特性检测') }}</p>
       </li>
       <li @click="showPlugin('benchmark')">
         <h3 style="border-top: 5px solid #424242">BENCHMARK</h3>
-        <p>Run JavaScript benchmarks</p>
+        <p>
+          {{ t('Run JavaScript benchmarks', '运行 JavaScript 基准测试') }}
+        </p>
       </li>
       <li @click="showPlugin('geolocation')">
         <h3 style="border-top: 5px solid #424242">GEOLOCATION</h3>
-        <p>Test geolocation</p>
+        <p>{{ t('Test geolocation', '测试地理位置') }}</p>
       </li>
       <li @click="showPlugin('timing')">
         <h3 style="border-top: 5px solid #616161">TIMING</h3>
-        <p>Show performance and resource timing</p>
+        <p>
+          {{ t('Show performance and resource timing', '显示资源加载时间') }}
+        </p>
       </li>
       <li @click="showPlugin('code')">
         <h3 style="border-top: 5px solid #9e9e9e">CODE</h3>
-        <p>Edit and run JavaScript</p>
+        <p>{{ t('Edit and run JavaScript', '编辑并运行 JavaScript') }}</p>
       </li>
       <li @click="showPlugin('orientation')">
         <h3 style="border-top: 5px solid #9e9e9e">ORIENTATION</h3>
-        <p>Test orientation api</p>
+        <p>{{ t('Test orientation api', '测试陀螺仪接口') }}</p>
       </li>
       <li @click="showPlugin('touches')">
         <h3 style="border-top: 5px solid #9e9e9e">TOUCHES</h3>
-        <p>Visualize screen touches</p>
+        <p>{{ t('Visualize screen touches', '可视化屏幕点击') }}</p>
       </li>
     </ul>
   </div>
