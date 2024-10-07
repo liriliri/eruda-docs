@@ -4,7 +4,7 @@
 
 ## Demo
 
-![Demo](https://eruda.liriliri.io/img/qrcode.png)
+![Demo](/qrcode.png)
 
 请扫描二维码或在手机上直接访问：[https://eruda.liriliri.io/](https://eruda.liriliri.io/)
 
