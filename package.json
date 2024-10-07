@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/liriliri/eruda-docs#readme",
   "devDependencies": {
+    "@types/node": "^22.7.4",
     "eruda": "latest",
     "licia": "^1.41.0",
     "vitepress": "^1.2.3"
