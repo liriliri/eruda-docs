@@ -245,8 +245,6 @@ View object, html, js, and css.
 |Name       |Type   |Desc             |
 |-----------|-------|-----------------|
 |showLineNum|boolean|Show Line Numbers|
-|formatCode |boolean|Beautify Code    |
-|indentSize |string |Indent Size      |
 
 ## Info
 
@@ -373,11 +371,11 @@ Add text.
 
 Add switch to toggle a boolean value.
 
-|Name|Type  |Desc                                   |
-|----|------|---------------------------------------|
-|cfg |object|Config object created by util.createCfg|
-|name|string|Option name                            |
-|desc|string|Option description                     |
+|Name|Type  |Desc              |
+|----|------|------------------|
+|cfg |object|Config object     |
+|name|string|Option name       |
+|desc|string|Option description|
 
 ### select
 

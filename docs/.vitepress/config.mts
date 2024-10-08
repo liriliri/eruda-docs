@@ -71,7 +71,7 @@ export default defineConfig({
             },
             {
               text: 'API',
-              link: '/docs/api',
+              link: '/zh/docs/api',
             },
             {
               text: '插件开发',
