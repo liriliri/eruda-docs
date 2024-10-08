@@ -75,7 +75,7 @@ export default defineConfig({
             },
             {
               text: '插件开发',
-              link: '/docs/plugin',
+              link: '/zh/docs/plugin',
             },
           ],
         },
