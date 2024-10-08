@@ -193,7 +193,7 @@ if (plugin) {
         style="z-index: 8"
         ontouchstart
       >
-        {{ t('打印信息', 'Log Message') }}
+        {{ t('Log Message', '打印信息') }}
       </li>
     </ul>
     <h2 class="plugin-title">{{ t('PLUGINS', '插件') }}</h2>
