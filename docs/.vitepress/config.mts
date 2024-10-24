@@ -31,6 +31,10 @@ export default defineConfig({
           text: 'Writing a Plugin',
           link: '/docs/plugin',
         },
+        {
+          text: 'Contributing Guide',
+          link: '/docs/contributing',
+        },
       ],
     },
     socialLinks: [
@@ -76,6 +80,10 @@ export default defineConfig({
             {
               text: '插件开发',
               link: '/zh/docs/plugin',
+            },
+            {
+              text: '贡献指南',
+              link: '/zh/docs/contributing',
             },
           ],
         },
