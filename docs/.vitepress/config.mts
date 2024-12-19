@@ -55,6 +55,10 @@ export default defineConfig({
         link: 'https://github.com/liriliri/eruda',
       },
     ],
+    footer: {
+      message: 'Released under the MIT License.',
+      copyright: 'Copyright © 2016-present liriliri'
+    }
   },
   locales: {
     root: {
@@ -87,6 +91,10 @@ export default defineConfig({
             },
           ],
         },
+        footer: {
+          message: '基于 MIT 许可发布',
+          copyright: '版权所有 © 2016 至今 liriliri'
+        }
       },
     },
   },
