@@ -40,15 +40,21 @@ export default defineConfig({
     socialLinks: [
       {
         icon: {
+          svg: icon('opencollective'),
+        },
+        link: 'https://opencollective.com/eruda',
+      },
+      {
+        icon: {
           svg: icon('kofi'),
         },
         link: 'https://ko-fi.com/surunzi',
       },
       {
         icon: {
-          svg: icon('opencollective'),
+          svg: icon('wechatpay'),
         },
-        link: 'https://opencollective.com/eruda',
+        link: 'https://surunzi.com/wechatpay.html',
       },
       {
         icon: 'github',
