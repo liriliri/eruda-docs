@@ -1,0 +1,48 @@
+name: Deploy Eruda 
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+      with: 
+        path: project/eruda-docs
+        lfs: true
+    - name: Clone eruda
+      uses: actions/checkout@v4
+      with:
+        repository: liriliri/eruda
+        path: project/eruda
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '18.x'
+    - working-directory: ./project/eruda-docs
+      run: |
+        npm i
+        npm run build
+    - working-directory: ./project/eruda
+      run: |
+        npm install -g @liriliri/lsla
+        npm i
+        npm run build
+        cp dist/eruda.js ../eruda-docs/dist/eruda.js
+    - working-directory: ./project/eruda-docs
+      run: |
+        mkdir -p ../../page/eruda
+        cp -r dist/* ../../page/eruda
+    - uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        source: "page/eruda/"
+        target: "/root/"    
+    
