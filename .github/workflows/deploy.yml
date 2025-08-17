@@ -36,13 +36,13 @@ jobs:
         cp dist/eruda.js ../eruda-docs/dist/eruda.js
     - working-directory: ./project/eruda-docs
       run: |
-        mkdir -p ../../page/eruda
-        cp -r dist/* ../../page/eruda
+        mkdir -p ../../liriliri/eruda
+        cp -r dist/* ../../liriliri/eruda
     - uses: appleboy/scp-action@master
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
-        source: "page/eruda/"
-        target: "/root/"    
+        source: "liriliri/eruda/"
+        target: "/var/www/"    
     
