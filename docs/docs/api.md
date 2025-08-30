@@ -8,13 +8,14 @@ Initialize eruda.
 
 #### Options
 
-|Name             |Type        |Desc                                                                                     |
-|-----------------|------------|-----------------------------------------------------------------------------------------|
-|container        |element     |Container element. If not set, it will append an element directly under html root element|
-|tool             |string array|Choose which default tools you want, by default all will be added                        |
-|autoScale=true   |boolean     |Auto scale eruda for different viewport settings                                         |
-|useShadowDom=true|boolean     |Use shadow dom for css encapsulation                                                     |
-|defaults         |object      |Default settings                                                                         |
+|Name             |Type        |Desc                                                                                                |
+|-----------------|------------|----------------------------------------------------------------------------------------------------|
+|container        |element     |Container element. If not set, it will append an element directly under html root element           |
+|tool             |string array|Choose which default tools you want, by default all will be added                                   |
+|autoScale=true   |boolean     |Auto scale eruda for different viewport settings                                                    |
+|useShadowDom=true|boolean     |Use shadow dom for css encapsulation                                                                |
+|inline=false     |boolean     |When enabled, entry button will be removed and eruda will be rendered inside the specified container|
+|defaults         |object      |Default settings                                                                                    |
 
 Available default settings:
 

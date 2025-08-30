@@ -14,6 +14,7 @@
 |tool|string array|选择你想要的默认面板，默认情况下会添加所有面板|
 |autoScale=true|boolean|为不同的视窗设置自动缩放 Eruda|
 |useShadowDom=true|boolean|使用 Shadow DOM 进行 CSS 隔离|
+|inline=false|boolean|开启后会移除入口按钮，并将窗口直接渲染到指定的节点中|
 |defaults|object|默认设置|
 
 可用的默认设置：
