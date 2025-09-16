@@ -23,6 +23,7 @@
     "@types/node": "^22.7.4",
     "eruda": "latest",
     "licia": "^1.41.0",
+    "luna-shader-toy-player": "^0.5.1",
     "vitepress": "^1.2.3"
   }
 }
