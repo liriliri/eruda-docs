@@ -289,15 +289,9 @@ if (plugin) {
   <div class="container">
     <header class="header">
       <luna-shader-toy-player
+        class="player"
         :controls="false"
         :renderPass="renderPass"
-        :style="{
-          position: 'absolute',
-          left: 0,
-          top: 0,
-          width: '100%',
-          height: '100%',
-        }"
       />
       <img src="/banner-bg.png" alt="Eruda" />
       <h1 class="title">Eruda</h1>
@@ -420,6 +414,13 @@ if (plugin) {
   margin: 0;
   padding: 30px 0 40px 0;
   color: #fff;
+}
+.player {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: '100%';
+  height: '100%';
 }
 #c {
   position: absolute;
