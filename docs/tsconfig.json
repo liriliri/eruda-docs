@@ -1,9 +1,0 @@
-{
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@theme/*": [".vitepress/theme/*"]
-    }
-  },
-  "include": [".vitepress/**/*"]
-}

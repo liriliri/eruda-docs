@@ -1,21 +1,18 @@
 import { defineConfig } from 'vitepress'
-import * as fs from 'fs'
-import * as path from 'path'
-
-const icon = (name: string) => {
-  return fs.readFileSync(path.resolve(__dirname, `${name}.svg`), 'utf8')
-}
+import {
+  icon,
+  logo,
+  kofi,
+  wechatpay,
+  googleAnalytics,
+} from './share/config.mts'
 
 export default defineConfig({
   title: 'Eruda',
   description: 'Eruda Documentation',
   outDir: '../dist',
   themeConfig: {
-    logo: {
-      src: '/logo.png',
-      width: 48,
-      height: 48,
-    },
+    logo,
     nav: [{ text: 'Docs', link: '/docs/' }],
     sidebar: {
       '/docs/': [
@@ -44,18 +41,8 @@ export default defineConfig({
         },
         link: 'https://opencollective.com/eruda',
       },
-      {
-        icon: {
-          svg: icon('kofi'),
-        },
-        link: 'https://ko-fi.com/surunzi',
-      },
-      {
-        icon: {
-          svg: icon('wechatpay'),
-        },
-        link: 'https://surunzi.com/wechatpay.html',
-      },
+      kofi,
+      wechatpay,
       {
         icon: 'github',
         link: 'https://github.com/liriliri/eruda',
@@ -112,20 +99,6 @@ export default defineConfig({
         onload: 'eruda.init()',
       },
     ],
-    [
-      'script',
-      {
-        async: '',
-        src: 'https://www.googletagmanager.com/gtag/js?id=G-KGLJXEGV2X',
-      },
-    ],
-    [
-      'script',
-      {},
-      `window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-KGLJXEGV2X');`,
-    ],
+    ...googleAnalytics('G-KGLJXEGV2X'),
   ],
 })
